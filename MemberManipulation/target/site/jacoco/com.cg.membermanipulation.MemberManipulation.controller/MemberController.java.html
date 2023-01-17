@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MemberController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MemberManipulation</a> &gt; <a href="index.source.html" class="el_package">com.cg.membermanipulation.MemberManipulation.controller</a> &gt; <span class="el_source">MemberController.java</span></div><h1>MemberController.java</h1><pre class="source lang-java linenums">package com.cg.membermanipulation.MemberManipulation.controller;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.membermanipulation.MemberManipulation.exception.AddressNotValidException;
+import com.cg.membermanipulation.MemberManipulation.model.Member;
+import com.cg.membermanipulation.MemberManipulation.repository.MemberRepository;
+
+import jakarta.validation.Valid;
+
+@RestController
+<span class="fc" id="L21">public class MemberController {</span>
+
+	@Autowired
+	MemberRepository memberRepository;
+	
+	
+<span class="fc" id="L27">	Member member = new Member();</span>
+	
+<span class="fc" id="L29">	private static final Logger LOGGER = LoggerFactory.getLogger(MemberController.class);</span>
+	
+	@GetMapping(&quot;/memberList&quot;)
+	public List&lt;Member&gt; viewAllMembers(){
+<span class="fc" id="L33">		return memberRepository.findAll(); </span>
+	}
+	
+	@PostMapping(&quot;/memberList/add&quot;)
+	public Member addMember(@RequestBody @Valid Member memObj) 
+//			throws AlreadyExistedMemberException
+	{
+		/*
+		 * // if((memberRepository.existsById(member.getMemberId()))){ // return
+		 * memberRepository.save(memObj); // }else { // throw new
+		 * AlreadyExistedMemberException(&quot;Member already exists&quot;); // }
+		 */		
+		
+<span class="fc" id="L46">		LOGGER.info(&quot;Member added&quot;);</span>
+<span class="fc" id="L47">		return memberRepository.save(memObj);</span>
+		
+		
+	}
+	
+	@GetMapping(&quot;/memberList/{address}&quot;)
+	public List&lt;Member&gt; viewMembersByAddress(@PathVariable(value = &quot;address&quot; ) String address) throws AddressNotValidException{
+		
+<span class="fc" id="L55">		List&lt;Member&gt; viewMembersByAddress = memberRepository.viewMembersByAddress(address);</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">		if(viewMembersByAddress.isEmpty()) {</span>
+<span class="nc" id="L57">			throw new AddressNotValidException(address+&quot; Address not found &quot;);</span>
+		}else {
+<span class="fc" id="L59">			return memberRepository.viewMembersByAddress(address);</span>
+		}
+
+	}
+
+	
+
+	
+	 
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
