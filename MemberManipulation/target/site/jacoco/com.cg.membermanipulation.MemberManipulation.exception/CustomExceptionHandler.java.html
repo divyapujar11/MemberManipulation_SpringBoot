@@ -12,45 +12,27 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 <span class="fc" id="L13">public class CustomExceptionHandler {</span>
 	
-	/*
-	 * @ExceptionHandler(AddressNotValidException.class) ResponseEntity&lt;?&gt;
-	 * handleInvalidArgumentException(Exception exception, ServletWebRequest
-	 * request){ APIerror apiError = new APIerror();
-	 * 
-	 * apiError.setTimeStamp(LocalDateTime.now());
-	 * apiError.setUriPath(request.getDescription(false));
-	 * apiError.setStatus(HttpStatus.BAD_REQUEST);
-	 * apiError.setErrors(exception.getMessage());
-	 * 
-	 * return new ResponseEntity(apiError, new HttpHeaders(), apiError.getStatus());
-	 * }
-	 */
+	
 	
 		@ResponseStatus(HttpStatus.BAD_REQUEST)
 	    @ExceptionHandler(MethodArgumentNotValidException.class)
 	    public Map&lt;String, String&gt; handleInvalidArgument(MethodArgumentNotValidException ex) {
-<span class="nc" id="L32">	        Map&lt;String, String&gt; errorMap = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L33">	        ex.getBindingResult().getFieldErrors().forEach(error -&gt; </span>
-<span class="nc" id="L34">	            errorMap.put(error.getField(), error.getDefaultMessage())</span>
+<span class="nc" id="L20">	        Map&lt;String, String&gt; errorMap = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L21">	        ex.getBindingResult().getFieldErrors().forEach(error -&gt; </span>
+<span class="nc" id="L22">	            errorMap.put(error.getField(), error.getDefaultMessage())</span>
 	        );
-<span class="nc" id="L36">	        return errorMap;</span>
+<span class="nc" id="L24">	        return errorMap;</span>
 	    }
 	
 	    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	    @ExceptionHandler(AddressNotValidException.class)
 	    public Map&lt;String, String&gt; handleAddressNotValidException(AddressNotValidException ex) {
-<span class="nc" id="L42">	        Map&lt;String, String&gt; errorMap = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L43">	        errorMap.put(&quot;errorMessage&quot;, ex.getMessage());</span>
-<span class="nc" id="L44">	        return errorMap;</span>
+<span class="nc" id="L30">	        Map&lt;String, String&gt; errorMap = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L31">	        errorMap.put(&quot;errorMessage&quot;, ex.getMessage());</span>
+<span class="nc" id="L32">	        return errorMap;</span>
 	    }
 	    
-	    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	    @ExceptionHandler(AlreadyExistedMemberException.class)
-	    public Map&lt;String, String&gt; handleAlreadyExistedMemberException(AlreadyExistedMemberException ex) {
-<span class="nc" id="L50">	        Map&lt;String, String&gt; errorMap = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L51">	        errorMap.put(&quot;errorMessage&quot;, ex.getMessage());</span>
-<span class="nc" id="L52">	        return errorMap;</span>
-	    }
+		
 	    
 	
 }

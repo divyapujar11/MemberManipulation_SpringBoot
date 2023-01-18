@@ -1,0 +1,6 @@
+com\cg\membermanipulation\MemberManipulation\exception\CustomExceptionHandler.class
+com\cg\membermanipulation\MemberManipulation\exception\AddressNotValidException.class
+com\cg\membermanipulation\MemberManipulation\MemberManipulationApplication.class
+com\cg\membermanipulation\MemberManipulation\model\Member.class
+com\cg\membermanipulation\MemberManipulation\repository\MemberRepository.class
+com\cg\membermanipulation\MemberManipulation\controller\MemberController.class

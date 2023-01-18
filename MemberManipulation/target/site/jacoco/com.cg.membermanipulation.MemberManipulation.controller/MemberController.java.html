@@ -12,59 +12,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.membermanipulation.MemberManipulation.exception.AddressNotValidException;
+
 import com.cg.membermanipulation.MemberManipulation.model.Member;
 import com.cg.membermanipulation.MemberManipulation.repository.MemberRepository;
 
 import jakarta.validation.Valid;
 
 @RestController
-<span class="fc" id="L21">public class MemberController {</span>
+<span class="fc" id="L22">public class MemberController {</span>
 
 	@Autowired
 	MemberRepository memberRepository;
-	
-	
+
 <span class="fc" id="L27">	Member member = new Member();</span>
-	
+
 <span class="fc" id="L29">	private static final Logger LOGGER = LoggerFactory.getLogger(MemberController.class);</span>
-	
+
 	@GetMapping(&quot;/memberList&quot;)
-	public List&lt;Member&gt; viewAllMembers(){
-<span class="fc" id="L33">		return memberRepository.findAll(); </span>
+	public List&lt;Member&gt; viewAllMembers() {
+<span class="fc" id="L33">		return memberRepository.findAll();</span>
 	}
-	
+
 	@PostMapping(&quot;/memberList/add&quot;)
-	public Member addMember(@RequestBody @Valid Member memObj) 
-//			throws AlreadyExistedMemberException
-	{
-		/*
-		 * // if((memberRepository.existsById(member.getMemberId()))){ // return
-		 * memberRepository.save(memObj); // }else { // throw new
-		 * AlreadyExistedMemberException(&quot;Member already exists&quot;); // }
-		 */		
-		
-<span class="fc" id="L46">		LOGGER.info(&quot;Member added&quot;);</span>
-<span class="fc" id="L47">		return memberRepository.save(memObj);</span>
-		
-		
+	public Member addMember(@RequestBody @Valid Member memObj) {
+
+<span class="fc" id="L39">		LOGGER.info(&quot;Member added&quot;);</span>
+<span class="fc" id="L40">		return memberRepository.save(memObj);</span>
+
 	}
-	
+
 	@GetMapping(&quot;/memberList/{address}&quot;)
-	public List&lt;Member&gt; viewMembersByAddress(@PathVariable(value = &quot;address&quot; ) String address) throws AddressNotValidException{
-		
-<span class="fc" id="L55">		List&lt;Member&gt; viewMembersByAddress = memberRepository.viewMembersByAddress(address);</span>
-<span class="pc bpc" id="L56" title="1 of 2 branches missed.">		if(viewMembersByAddress.isEmpty()) {</span>
-<span class="nc" id="L57">			throw new AddressNotValidException(address+&quot; Address not found &quot;);</span>
-		}else {
-<span class="fc" id="L59">			return memberRepository.viewMembersByAddress(address);</span>
+	public List&lt;Member&gt; viewMembersByAddress(@PathVariable(value = &quot;address&quot;) String address)
+			throws AddressNotValidException {
+
+<span class="fc" id="L48">		List&lt;Member&gt; viewMembersByAddress = memberRepository.viewMembersByAddress(address);</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">		if (viewMembersByAddress.isEmpty()) {</span>
+<span class="nc" id="L50">			throw new AddressNotValidException(address + &quot; Address not found &quot;);</span>
+		} else {
+<span class="fc" id="L52">			return memberRepository.viewMembersByAddress(address);</span>
 		}
 
 	}
 
-	
-
-	
-	 
-	
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

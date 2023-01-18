@@ -12,19 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class CustomExceptionHandler {
 	
-	/*
-	 * @ExceptionHandler(AddressNotValidException.class) ResponseEntity<?>
-	 * handleInvalidArgumentException(Exception exception, ServletWebRequest
-	 * request){ APIerror apiError = new APIerror();
-	 * 
-	 * apiError.setTimeStamp(LocalDateTime.now());
-	 * apiError.setUriPath(request.getDescription(false));
-	 * apiError.setStatus(HttpStatus.BAD_REQUEST);
-	 * apiError.setErrors(exception.getMessage());
-	 * 
-	 * return new ResponseEntity(apiError, new HttpHeaders(), apiError.getStatus());
-	 * }
-	 */
+	
 	
 		@ResponseStatus(HttpStatus.BAD_REQUEST)
 	    @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -44,13 +32,7 @@ public class CustomExceptionHandler {
 	        return errorMap;
 	    }
 	    
-	    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	    @ExceptionHandler(AlreadyExistedMemberException.class)
-	    public Map<String, String> handleAlreadyExistedMemberException(AlreadyExistedMemberException ex) {
-	        Map<String, String> errorMap = new HashMap<>();
-	        errorMap.put("errorMessage", ex.getMessage());
-	        return errorMap;
-	    }
+		
 	    
 	
 }

@@ -1,5 +1,6 @@
 package com.cg.membermanipulation.MemberManipulation.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.validation.constraints.NotNull;
@@ -8,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 public class Member {
 
 
+	@Id 
 	@NotNull(message = "memberId must not be null")
 	private int memberId;
 	@NotNull(message = "memberName must not be null")
