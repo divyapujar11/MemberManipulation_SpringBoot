@@ -11,29 +11,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 <span class="fc" id="L13">public class CustomExceptionHandler {</span>
-	
-	
-	
-		@ResponseStatus(HttpStatus.BAD_REQUEST)
-	    @ExceptionHandler(MethodArgumentNotValidException.class)
-	    public Map&lt;String, String&gt; handleInvalidArgument(MethodArgumentNotValidException ex) {
-<span class="nc" id="L20">	        Map&lt;String, String&gt; errorMap = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L21">	        ex.getBindingResult().getFieldErrors().forEach(error -&gt; </span>
-<span class="nc" id="L22">	            errorMap.put(error.getField(), error.getDefaultMessage())</span>
-	        );
-<span class="nc" id="L24">	        return errorMap;</span>
-	    }
-	
-	    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	    @ExceptionHandler(AddressNotValidException.class)
-	    public Map&lt;String, String&gt; handleAddressNotValidException(AddressNotValidException ex) {
-<span class="nc" id="L30">	        Map&lt;String, String&gt; errorMap = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L31">	        errorMap.put(&quot;errorMessage&quot;, ex.getMessage());</span>
-<span class="nc" id="L32">	        return errorMap;</span>
-	    }
-	    
-		
-	    
-	
+
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ExceptionHandler(AddressNotValidException.class)
+	public Map&lt;String, String&gt; handleAddressNotValidException(AddressNotValidException ex) {
+<span class="nc" id="L18">		Map&lt;String, String&gt; errorMap = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L19">		errorMap.put(&quot;errorMessage&quot;, ex.getMessage());</span>
+<span class="nc" id="L20">		return errorMap;</span>
+	}
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
