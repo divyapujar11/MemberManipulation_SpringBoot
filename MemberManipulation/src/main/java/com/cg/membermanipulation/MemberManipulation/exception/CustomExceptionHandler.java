@@ -19,5 +19,6 @@ public class CustomExceptionHandler {
 		errorMap.put("errorMessage", ex.getMessage());
 		return errorMap;
 	}
+	
 
 }

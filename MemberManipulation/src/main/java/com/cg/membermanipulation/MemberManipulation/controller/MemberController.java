@@ -24,8 +24,6 @@ public class MemberController {
 	@Autowired
 	MemberRepository memberRepository;
 
-	Member member = new Member();
-
 	private static final Logger LOGGER = LoggerFactory.getLogger(MemberController.class);
 
 	@GetMapping("/memberList")

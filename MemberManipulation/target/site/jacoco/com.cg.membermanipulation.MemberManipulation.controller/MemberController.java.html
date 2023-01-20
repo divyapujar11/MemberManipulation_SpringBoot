@@ -24,20 +24,18 @@ import jakarta.validation.Valid;
 	@Autowired
 	MemberRepository memberRepository;
 
-<span class="fc" id="L27">	Member member = new Member();</span>
-
-<span class="fc" id="L29">	private static final Logger LOGGER = LoggerFactory.getLogger(MemberController.class);</span>
+<span class="fc" id="L27">	private static final Logger LOGGER = LoggerFactory.getLogger(MemberController.class);</span>
 
 	@GetMapping(&quot;/memberList&quot;)
 	public List&lt;Member&gt; viewAllMembers() {
-<span class="fc" id="L33">		return memberRepository.findAll();</span>
+<span class="fc" id="L31">		return memberRepository.findAll();</span>
 	}
 
 	@PostMapping(&quot;/memberList/add&quot;)
 	public Member addMember(@RequestBody @Valid Member memObj) {
 
-<span class="fc" id="L39">		LOGGER.info(&quot;Member added&quot;);</span>
-<span class="fc" id="L40">		return memberRepository.save(memObj);</span>
+<span class="fc" id="L37">		LOGGER.info(&quot;Member added&quot;);</span>
+<span class="fc" id="L38">		return memberRepository.save(memObj);</span>
 
 	}
 
@@ -45,11 +43,11 @@ import jakarta.validation.Valid;
 	public List&lt;Member&gt; viewMembersByAddress(@PathVariable(value = &quot;address&quot;) String address)
 			throws AddressNotValidException {
 
-<span class="fc" id="L48">		List&lt;Member&gt; viewMembersByAddress = memberRepository.viewMembersByAddress(address);</span>
-<span class="pc bpc" id="L49" title="1 of 2 branches missed.">		if (viewMembersByAddress.isEmpty()) {</span>
-<span class="nc" id="L50">			throw new AddressNotValidException(address + &quot; Address not found &quot;);</span>
+<span class="fc" id="L46">		List&lt;Member&gt; viewMembersByAddress = memberRepository.viewMembersByAddress(address);</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">		if (viewMembersByAddress.isEmpty()) {</span>
+<span class="fc" id="L48">			throw new AddressNotValidException(address + &quot; Address not found &quot;);</span>
 		} else {
-<span class="fc" id="L52">			return memberRepository.viewMembersByAddress(address);</span>
+<span class="fc" id="L50">			return memberRepository.viewMembersByAddress(address);</span>
 		}
 
 	}
